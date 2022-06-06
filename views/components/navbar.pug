@@ -1,0 +1,22 @@
+nav(class="bg-gray-800")
+    div(class="flex flex-row justify-between items-center max-w-7xl mx-auto px-2 sm:px-6 lg:px-8")
+        ul(class="flex text-white p-5 gap-2")
+            li
+                header(class="flex flex-row text-center")
+                    img(class="h-8 mr-2", src="/assets/logo.svg", alt="Workflow")
+                    | Playlist
+            if Object.keys(user).length != 0
+                li
+                    a(href="/" class="p-3 bg-slate-700 rounded") Inicio
+                li
+                    a(href="/playlist") Tu biblioteca
+                li
+                    a(href="#") #{user.name}
+
+        div(class="flex flex-row text-white")
+            button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
+                a(href="/login") Iniciar sesión
+            if Object.keys(user).length != 0
+                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
+                    | crear playlist
+                img(class="fill-current text-teal-500 inline-block h-12 w-12", src="/assets/user-circle.svg", alt="Workflow")
