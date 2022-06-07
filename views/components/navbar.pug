@@ -5,7 +5,7 @@ nav(class="bg-gray-800")
                 header(class="flex flex-row text-center")
                     img(class="h-8 mr-2", src="/assets/logo.svg", alt="Workflow")
                     | Playlist
-            if Object.keys(user).length != 0
+            if user
                 li
                     a(href="/" class="p-3 bg-slate-700 rounded") Inicio
                 li
@@ -14,9 +14,12 @@ nav(class="bg-gray-800")
                     a(href="#") #{user.name}
 
         div(class="flex flex-row text-white")
-            button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
-                a(href="/login") Iniciar sesión
-            if Object.keys(user).length != 0
+            if !user
+                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
+                    a(href="/login") Iniciar sesión
+            if user
+                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
+                    a(href="/api/logout") Cerrar sesión
                 button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
                     | crear playlist
                 img(class="fill-current text-teal-500 inline-block h-12 w-12", src="/assets/user-circle.svg", alt="Workflow")

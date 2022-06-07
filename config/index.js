@@ -3,6 +3,8 @@ const dotenv = require("dotenv")
 dotenv.config() // Cargar el arhivo .env a las variables de entorno del SO
 
 const config = {
+    production:process.env.NODE_ENV==="production",
+    development:process.env.NODE_ENV==="development",
     port: process.env.PORT, //Leer variable de entorno del SO
     dbHost: process.env.DB_HOST,
     dbPort: process.env.DB_PORT,

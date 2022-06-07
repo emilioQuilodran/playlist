@@ -2,9 +2,9 @@
 //const login = () => {}
 //module.exports = {}
 // tmb se puede generar como clase : mas facil al exportar la funcionalidad
-const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const query = require('express/lib/middleware/query');
+const User = require('../models/User');
+const {query} = require("../libs/database")
 
 class AuthController {
     static async login(req, res){
@@ -13,9 +13,12 @@ class AuthController {
         if(success && user){
             try {
                 if(await bcrypt.compare(password, user.password)){
-                    req.session.loggedIn = true;
-                    req.session.email = user.email;
-                    req.session.id = user.id; 
+                    req.session.user = {
+                        loggedIn : true,
+                        name : user.name,
+                        email : user.email,
+                        idUser : user.id,
+                    }
                     return res.redirect("/")
                 }
             } catch (error) {
@@ -36,7 +39,7 @@ class AuthController {
         return res.render('signup')
     }
 
-    static async signUp(req , res){
+    static async signUp(req, res){
         const salt = await bcrypt.genSalt(10);
         const password = await bcrypt.hash(req.body.password, salt);
 
@@ -51,13 +54,12 @@ class AuthController {
             [Object.keys(data), Object.values(data)])
 
             req.session.user = {
+                loggedIn : true,
                 name : data.name,
-                loggedIn :true,
                 email : data.email,
-                idUser : result.insertId
-                
+                idUser : result.insertId,
             }
-            res.redirect("/")
+            return res.redirect("/")
         } catch (error) {
             return res.render('signup',{
                 error: "verifica los datos",

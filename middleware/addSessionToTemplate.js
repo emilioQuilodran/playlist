@@ -1,9 +1,7 @@
 const addSessionToTemplate = (req, res, next) => {
-    let userInfo = req.session.user;
-    if(userInfo){
-        res.locals.user = userInfo
-        next()
-    }
+    const user = req.session.user
+    res.locals.user = user
+    next()
 }
 
 module.exports = addSessionToTemplate;
