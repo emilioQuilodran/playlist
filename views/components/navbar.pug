@@ -1,25 +1,35 @@
-nav(class="bg-gray-800")
-    div(class="flex flex-row justify-between items-center max-w-7xl mx-auto px-2 sm:px-6 lg:px-8")
-        ul(class="flex text-white p-5 gap-2")
-            li
-                header(class="flex flex-row text-center")
-                    img(class="h-8 mr-2", src="/assets/logo.svg", alt="Workflow")
-                    | Playlist
-            if user
-                li
-                    a(href="/" class="p-3 bg-slate-700 rounded") Inicio
-                li
-                    a(href="/playlist") Tu biblioteca
-                li
-                    a(href="#") #{user.name}
-
-        div(class="flex flex-row text-white")
-            if !user
-                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
-                    a(href="/login") Iniciar sesión
-            if user
-                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
-                    a(href="/api/logout") Cerrar sesión
-                button(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded")
-                    | crear playlist
-                img(class="fill-current text-teal-500 inline-block h-12 w-12", src="/assets/user-circle.svg", alt="Workflow")
+header
+    nav.navbar.navbar-expand-lg.shadow-md.py-2.bg-white.relative.flex.items-center.w-full.justify-between.bg-stone-900
+        div.px-6.w-full.flex.flex-wrap.items-center.justify-between
+            div(class="flex flex-row items-center text-center text-white")
+                img(class="h-8 mr-2", src="/assets/logo.svg", alt="Workflow")
+                | BeatingCloud
+            div.flex.items-center
+                button.navbar-toggler.border-0.py-3.leading-none.text-xl.bg-transparent.text-gray-600.transition-shadow.duration-150.ease-in-out.mr-2(class='lg:hidden hover:text-gray-700 focus:text-gray-700', type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContentY', aria-controls='navbarSupportedContentY', aria-expanded='false', aria-label='Toggle navigation')
+                    svg.w-5(aria-hidden='true', focusable='false', data-prefix='fas', role='img', xmlns='http://www.w3.org/2000/svg', viewBox='0 0 448 512')
+                        path(fill='currentColor', d='M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z')
+            div#navbarSupportedContentY.navbar-collapse.collapse.items-center(class="lg:flex lg:flex-row-reverse")
+                ul.navbar-nav.mr-auto(class="lg:flex lg:flex-row-reverse")
+                    if user
+                        li.nav-item
+                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='/', data-mdb-ripple='true', data-mdb-ripple-color='light') Inicio
+                        li.nav-item
+                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='/playlists', data-mdb-ripple='true', data-mdb-ripple-color='light') Tu biblioteca
+                        li.nav-item 
+                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='/songs', data-mdb-ripple='true', data-mdb-ripple-color='light')  Songs
+                        li.nav-item
+                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='#!', data-mdb-ripple='true', data-mdb-ripple-color='light') #{user.name}
+                        li.nav-item
+                            button(class="inline-block px-6 py-2 border-2 ml-2 border-purple-600 text-purple-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
+                                a(href="/auth/logout") Cerrar sesión
+                        li.nav-item
+                            button(class="inline-block px-6 py-2 border-2 ml-2 border-purple-600 text-purple-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
+                                | crear playlist
+                    if !user
+                        li.nav-item
+                            button(class="inline-block px-6 py-2 border-2 ml-2 border-gray-200 text-gray-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
+                                a(href="/auth/login") Iniciar sesión
+                        li.nav-item
+                            button(class="inline-block px-6 py-2 border-2 ml-2 border-purple-600 text-purple-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
+                                a(href="/auth/signup") Unete
+                        

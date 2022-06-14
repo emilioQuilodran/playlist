@@ -1,18 +1,15 @@
 const {query} = require('../libs/database');
 class User {
-    static async getOneByEmail(email){
-        try {
-            const user = await query(`select * from users WHERE email=?`, [email])
+    static async getByEmail(email){
+        const user = await query("SELECT * FROM users WHERE email=?",[email])
+        if(user.success){
             return {
-                success: true,
-                user: user[0]
-            }
-        } catch (error) {
-            return {
-                success: false,
-                msg: "ocurrio un error"
+                success:true,
+                user:user.result[0]
             }
         }
+
+        return user
     }
 }
 

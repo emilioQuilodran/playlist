@@ -10,7 +10,23 @@ const connection = mysql.createConnection({
 }) //function
 
 
-function query(sql,data){
+async function query(sql,data){
+    console.log(sql, data)
+    try {
+        const result = await queryPromise(sql,data)
+        return {
+            success:true,
+            result
+        }
+    } catch (error) {
+        return {
+            success:false,
+            message:error.message
+        }
+    }
+}
+
+function queryPromise(sql, data){
     return new Promise(function (resolve,reject){
         connection.query(sql,data,function(error,result,fields){
             if(error!=null){
