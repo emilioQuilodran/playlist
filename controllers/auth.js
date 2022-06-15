@@ -5,13 +5,19 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const {query} = require("../libs/database")
+const { validationResult } = require('express-validator');
 
 class AuthController {
     static async login(req, res){
         const { email, password } = req.body;
-        const {success, user} = await User.getByEmail(email);
-        console.log("user", user);
+        const errors = validationResult(req)
 
+        if(!errors.isEmpty()) {
+            return res.status(422).render("login" , {
+                msg: "las credenciales son incorrectas",
+            })
+        }
+        const {success, user} = await User.getByEmail(email);
         if(success && user){
             try {
                 if(await bcrypt.compare(password, user.password)){
@@ -27,10 +33,6 @@ class AuthController {
                 console.log(error);
             }
         }
-        return res.render("login" , {
-            msg: "las credenciales son incorrectas",
-            user
-        })
     }
 
     static getLoginForm(req,res){
@@ -42,6 +44,14 @@ class AuthController {
     }
 
     static async signUp(req,res){
+        const errors = validationResult(req)
+        console.log(errors);
+        if(!errors.isEmpty()) {
+            return res.status(422).render("signup" , {
+                msg: "Verifique los datos ingresados",
+            })
+        }
+
         const salt = await bcrypt.genSalt(10)
         const password = await bcrypt.hash(req.body.password,salt)
         const data = {
@@ -55,10 +65,7 @@ class AuthController {
                 "INSERT INTO users(??) VALUES(?)",
                 [Object.keys(data),Object.values(data)]
             )
-            console.log(result)
-            // validar resultado de la llamadada, 
-            // esta fallando porq esta mal mandado el formato 
-            // pero aun así crea la sesion
+
             req.session.user = {
                 loggedIn : true,
                 name : data.name,

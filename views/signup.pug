@@ -15,22 +15,22 @@ block content
                         p(class="mt-3 text-gray-500 dark:text-gray-300") Unete y disfruta de una experiencia increible
 
                     div(class="mt-8")
-                        if error
+                        if msg
                             div(class="bg-red-200 rounded-lg py-5 px-6 mb-5 text-base text-red-700" role="alert")
-                                p #{error}
+                                p #{msg}
                         form(action="/auth/signup", method="post")
                             div(class="mt-6")
                                 label(for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200") Nombre
-                                input(type="text", name="name",class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.name : null)
+                                input(type="text",id="name", name="name",class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.name : null)
                             div(class="mt-6")
                                 label(for="birthday" class="block mb-2 text-sm text-gray-600 dark:text-gray-200") Fecha de cumpleaños
-                                input(type="date",  name="birthday", class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.birthday : null)
+                                input(type="date", id="birthday", name="birthday", class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.birthday : null)
                             div(class="mt-6")
                                 label(for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200") Correo electronico
-                                input(type="email", name="email",class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.email : null)
+                                input(type="email", id="email", name="email",class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.email : null)
                             div(class="mt-6")
                                 label(for="password" class="block mb-2 text-sm text-gray-600 dark:text-gray-200") Contraseña
-                                input(type="password", name="password", class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.password : null)
+                                input(type="password", id="password", name="password", class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-stone-600 dark:bg-stone-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40", value=user ? user.password : null)
                             div(class="mt-6")
                                 button(class="w-full inline-block px-6 py-2 border-2 ml-2 border-gray-200 text-gray-200 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
                                     | Crear cuenta

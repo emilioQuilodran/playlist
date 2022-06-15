@@ -1,5 +1,7 @@
-const btn1 = document.getElementById('showModal')
-console.log("hola");
-function show(){
-    console.log("playlist", btn1);
+const profile = document.getElementById('profile-menu');
+const avatar = document.getElementById('avatar');
+console.log("hola", profile);
+
+function showProfile(){
+    profile.classList.toggle('hidden');
 }
