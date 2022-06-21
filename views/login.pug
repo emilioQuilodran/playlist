@@ -23,9 +23,9 @@ block content
                         p(class="mt-3 text-gray-500 dark:text-gray-300") Inicia sesión para acceder a tu cuenta
 
                     div(class="mt-8")
-                        if msg
+                        if error
                             div(class="bg-red-200 rounded-lg py-5 px-6 mb-5 text-base text-red-700" role="alert")
-                                p #{msg}
+                                p #{error}
                         form(action="/auth/login" method="post")
                             div
                                 label(for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200") correo electrónico

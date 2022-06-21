@@ -7,14 +7,9 @@ header
                     | BeatingCloud
                 if user
                     div.flex.items-center.ml-3
-                        button.bg-gray-800.p-1.rounded-full.text-gray-400(type='button', class='hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white')
-                            span.sr-only View notifications
-                            //- Heroicon name: outline/bell
-                            svg.h-6.w-6(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24', stroke-width='2', stroke='currentColor', aria-hidden='true')
-                                path(stroke-linecap='round', stroke-linejoin='round', d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9')
                         .ml-3.relative
                             div
-                                button#user-menu-button.bg-gray-800.flex.text-sm.rounded-full(type='button', class='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white', aria-expanded='false', aria-haspopup='true')
+                                button.bg-gray-800.flex.text-sm.rounded-full(type='button', class='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white', aria-haspopup='true' id="menu-button" aria-expanded="true")
                                     span.sr-only Open user menu
                                     img#avatar.h-8.w-8.rounded-full(
                                         src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', 
@@ -29,11 +24,20 @@ header
                                         From: "transform opacity-100 scale-100"
                                         To: "transform opacity-0 scale-95"
                                         
-                            .origin-top-right.absolute.right-0.mt-2.w-48.rounded-md.shadow-lg.py-1.bg-white.ring-1.ring-black.ring-opacity-5(id="profile-menu" class='focus:outline-none hidden', role='menu', aria-orientation='vertical', aria-labelledby='user-menu-button', tabindex='-1')
+                            .origin-top-right.absolute.left-0.mt-2.w-48.rounded-md.shadow-lg.py-1.bg-white.ring-1.ring-black.ring-opacity-5.ring-opacity-5.divide-y.divide-gray-100.invisible(id="profile-menu" class='focus:outline-none', role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1")
                                 //- Active: "bg-gray-100", Not Active: ""
-                                a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700(href='#', role='menuitem', tabindex='-1') Your Profile
-                                a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700(href='#', role='menuitem', tabindex='-1') Settings
-                                a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700(href='/auth/logout', role='menuitem', tabindex='-1') Sign out
+                                a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700(href='/profile', role='menuitem', tabindex='-1') Ver perfil
+                                a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700(href='/settings', role='menuitem', tabindex='-1') Configuración
+                                a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700(href='/auth/logout', role='menuitem', tabindex='-1') Cerrar sesión
+                        button.ml-2.bg-gray-800.p-1.rounded-full.text-gray-400(type='button', class='hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white')
+                            span.sr-only View notifications
+                            //- Heroicon name: outline/bell
+                            div(class="relative")
+                                span.flex.h-3.w-3.absolute.top-0.right-0.-mt-10.-mr-10
+                                    span.animate-ping.absolute.inline-flex.h-full.w-full.rounded-full.bg-purple-400.opacity-75
+                                    span.relative.inline-flex.rounded-full.h-3.w-3.bg-purple-500
+                                svg.h-6.w-6(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24', stroke-width='2', stroke='currentColor', aria-hidden='true')
+                                    path(stroke-linecap='round', stroke-linejoin='round', d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9')
             div.flex.items-center
                 button.navbar-toggler.border-0.py-3.leading-none.text-xl.bg-transparent.text-gray-600.transition-shadow.duration-150.ease-in-out.mr-2(class='lg:hidden hover:text-gray-700 focus:text-gray-700', type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContentY', aria-controls='navbarSupportedContentY', aria-expanded='false', aria-label='Toggle navigation')
                     svg.w-5(aria-hidden='true', focusable='false', data-prefix='fas', role='img', xmlns='http://www.w3.org/2000/svg', viewBox='0 0 448 512')
@@ -42,9 +46,9 @@ header
                 ul.navbar-nav.mr-auto(class="lg:flex lg:flex-row-reverse")
                     if user
                         li.nav-item
-                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='/playlists', data-mdb-ripple='true', data-mdb-ripple-color='light') Tu biblioteca
+                            a.nav-link.block.pr-2.py-2.text-slate-100.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-slate-300 focus:text-slate-300', href='/playlists', data-mdb-ripple='true', data-mdb-ripple-color='light') Tu biblioteca
                         li.nav-item 
-                            a.nav-link.block.pr-2.py-2.text-gray-600.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-gray-700 focus:text-gray-700', href='/songs', data-mdb-ripple='true', data-mdb-ripple-color='light')  Songs
+                            a.nav-link.block.pr-2.py-2.text-slate-100.transition.duration-150.ease-in-out(class='lg:px-2 hover:text-slate-300 focus:text-slate-300', href='/songs', data-mdb-ripple='true', data-mdb-ripple-color='light')  Songs
                         li.nav-item
                             button(class="inline-block px-6 py-2 border-2 ml-2 border-purple-600 text-purple-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out")
                                 | crear playlist

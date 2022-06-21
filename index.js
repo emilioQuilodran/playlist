@@ -1,8 +1,9 @@
 const express = require("express")
 const session = require("express-session");
 const path = require('path');
-const { port, sessionSecret } = require("./config")
 const addSessionToTemplate = require('./middleware/addSessionToTemplate');
+
+const { port, sessionSecret } = require("./config")
 
 // Routes
 const auth = require("./routes/auth")
