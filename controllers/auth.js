@@ -45,11 +45,14 @@ class AuthController {
     }
 
     async signUp(req,res){
+        const reqUser = req.body;
+        const {success, user} = await User.getByEmail(reqUser?.email);
         const errors = validationResult(req)
         if(!errors.isEmpty()) {
             return res.status(422).render("signup" , {
                 msg: "Verifique los datos ingresados",
-                errors: errors.errors
+                user: reqUser,
+                errors
             })
         }
         /**

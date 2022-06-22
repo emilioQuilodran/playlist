@@ -4,6 +4,7 @@ const AuthController = require('../controllers/auth');
 const authController = new AuthController() //Instancia de una clase (Objeto)
 const authPermissions = require("../middleware/authPermissions");
 const { check } = require('express-validator');
+const User = require('../models/User');
 
 const router = express.Router()
 
@@ -24,19 +25,20 @@ router.post("/login", [
 
 router.get("/signup",AuthController.getSignUpForm)
 
-/*
-router.post("/signup",
-    check('name').exists(),
-    check('email').isEmail(),
-    check('password').exists(),
-    check('birthday').exists(),
-    AuthController.signUp)
-*/
 router.post("/signup", [
+    check('name').notEmpty()
+    .withMessage('name is required'),
     check('email').isEmail()
-    .withMessage('Must be a valid email'),
+    .custom(async (email) => {
+        const {user} = await User.getByEmail(email);
+        if (user) {
+            throw new Error('Email already in use')
+        }
+    }),
     check('password').isLength({ min: 3 })
-    .withMessage('Must be at least 8 chars long')
+    .withMessage('Password must be greater than 3 chars long'),
+    check('birthday').notEmpty()
+    .withMessage('birthday is required')
     ],(req,res)=>{
         authController.signUp(req,res)
 })

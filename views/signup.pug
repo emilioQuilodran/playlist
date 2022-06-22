@@ -19,8 +19,7 @@ block content
                             div(class="bg-red-200 rounded-lg py-5 px-6 mb-5 text-base text-red-700" role="alert")
                                 p #{msg}
                                 ul
-                                    each error in errors
-                                        - console.log("errores desde front: ", error);
+                                    each error in errors.errors
                                         li=error.msg
                         form(action="/auth/signup", method="post")
                             div(class="mt-6")
