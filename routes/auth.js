@@ -32,8 +32,13 @@ router.post("/signup",
     check('birthday').exists(),
     AuthController.signUp)
 */
-router.post("/signup",(req,res)=>{
-    authController.signUp(req,res)
+router.post("/signup", [
+    check('email').isEmail()
+    .withMessage('Must be a valid email'),
+    check('password').isLength({ min: 3 })
+    .withMessage('Must be at least 8 chars long')
+    ],(req,res)=>{
+        authController.signUp(req,res)
 })
 
 router.get("/logout",AuthController.logout)

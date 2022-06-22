@@ -4,8 +4,8 @@ const avatar = document.getElementById('avatar');
 function showProfile(){
     profile.classList.toggle('invisible');
 }
-function showAlert(user){
-    console.log("hello from a wrapper function", user);
+function showAlert(name){
+    console.log("hello from a wrapper function", name);
     Swal.fire({
         title: "Alert Set on Timer",
         text: "This alert will disappear after 3 seconds.",

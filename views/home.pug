@@ -37,12 +37,12 @@ block content
             section(class="py-6 px-6 lg:px-8 text-white")
                 button(
                     id="showModal",
-                    onclick="showAlert(#{user})") disparar modal
+                    onclick="showAlert('#{user.name}')") disparar modal
                 p content sistem
-        script
-            include ../static/js/sweetalert2.js
-        script
-            include ../static/js/playlist.js
     include ./components/footer.pug
     script
         include ../static/js/twelements.js
+    script
+        include ../static/js/sweetalert2.js
+    script
+        include ../static/js/playlist.js

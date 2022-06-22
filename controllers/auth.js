@@ -45,43 +45,47 @@ class AuthController {
     }
 
     async signUp(req,res){
-        const {user} = await User.getByEmail(req.body.email);
-        const data = {
-            name:req.body.name,
-            email:req.body.email,
-            password: await this.encrypt(req.body.password),
-            birthday:req.body.birthday
-        }
-        if(!user){
-            try {
-                const result = await query(
-                    "INSERT INTO users(??) VALUES(?)",
-                    [Object.keys(data),Object.values(data)]
-                )
-    
-                req.session.user = {
-                    loggedIn : true,
-                    name : data.name,
-                    email : data.email,
-                    idUser : result.insertId,
-                }
-                return res.redirect("/")
-            }catch(error){
-                return res.render("signup",{
-                    error:"Verifica los datos ingresados",
-                    user:{
-                        name:req.body.name,
-                        email:req.body.email,
-                        password: req.body.password,
-                        birthday:req.body.birthday
-                    }
-                })
-            }
-        } else if(user.email === data.email) {
-            return res.render("signup",{
-                error:"El email esta en uso: intenta con otro"
+        const errors = validationResult(req)
+        if(!errors.isEmpty()) {
+            return res.status(422).render("signup" , {
+                msg: "Verifique los datos ingresados",
+                errors: errors.errors
             })
         }
+        /**
+         * try {
+            const salt = await bcrypt.genSalt(10)
+            const password = await bcrypt.hash(req.body.password,salt)
+            const data = {
+                name:req.body.name,
+                email:req.body.email,
+                password: password,
+                birthday:req.body.birthday
+            }
+            const result = await query(
+                "INSERT INTO users(??) VALUES(?)",
+                [Object.keys(data),Object.values(data)]
+            )
+
+            req.session.user = {
+                loggedIn : true,
+                name : data.name,
+                email : data.email,
+                idUser : result.insertId,
+            }
+            return res.redirect("/")
+        }catch(error){
+            return res.render("signup",{
+                error:"Verifica los datos",
+                user:{
+                    name:req.body.name,
+                    email:req.body.email,
+                    password: req.body.password,
+                    birthday:req.body.birthday
+                }
+            })
+        }
+         */
     }
 
     static logout(req,res){

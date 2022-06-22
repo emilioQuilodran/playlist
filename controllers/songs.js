@@ -17,7 +17,10 @@ class SongsController{
         const {success,result,message} = await Song.create(req.body)
 
         if(success){
-            return res.redirect("/songs")
+            return res.render("/songs",{
+                song:req.body,
+                error:message
+            })
         }
 
         return res.render("songs",{
