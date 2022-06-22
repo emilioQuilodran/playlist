@@ -46,7 +46,6 @@ class AuthController {
 
     async signUp(req,res){
         const reqUser = req.body;
-        const {success, user} = await User.getByEmail(reqUser?.email);
         const errors = validationResult(req)
         if(!errors.isEmpty()) {
             return res.status(422).render("signup" , {
@@ -55,8 +54,7 @@ class AuthController {
                 errors
             })
         }
-        /**
-         * try {
+        try {
             const salt = await bcrypt.genSalt(10)
             const password = await bcrypt.hash(req.body.password,salt)
             const data = {
@@ -69,7 +67,7 @@ class AuthController {
                 "INSERT INTO users(??) VALUES(?)",
                 [Object.keys(data),Object.values(data)]
             )
-
+            
             req.session.user = {
                 loggedIn : true,
                 name : data.name,
@@ -88,7 +86,6 @@ class AuthController {
                 }
             })
         }
-         */
     }
 
     static logout(req,res){
