@@ -17,11 +17,19 @@ class Playlist{
     }
     static async create(data){
         try {
-            const result =await query("INSERT INTO playlists(??) VALUES(?)",[Object.keys(data),Object.values(data)])
-            return {
-                success:true,
-                result
+            if(data.name){
+                const result = await query("INSERT INTO playlists(??) VALUES(?)",[Object.keys(data),Object.values(data)])
+                return {
+                    success:true,
+                    result
+                }
+            } else {
+                return {
+                    success:false,
+                    message: "debes ingresar un titulo"
+                }
             }
+            
         } catch ({message}) {
             return {
                 success:false,

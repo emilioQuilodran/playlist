@@ -2,9 +2,8 @@ const Playlist = require("../models/Playlist")
 class Playlists {
     static async getMyPlaylists(req, res){
         const {result} = await Playlist.getMyPlaylists(req.session.user.idUser)
-        console.log(result)
         return res.render("playlists",{
-            playlists:result
+            playlists: result.result
         })
     }
     static async create(req,res){

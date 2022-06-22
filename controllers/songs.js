@@ -6,8 +6,8 @@ class SongsController{
         const {result:songs} = await Song.getAll()
         const {result:playlists} = await Playlist.getMyPlaylists(req.session.user.idUser)
 
-        console.log(songs)
-        console.log(playlists)
+        console.log("canciones: ",songs)
+        console.log("playlist desde controller de songs: ", playlists)
         return res.render("songs",{
             songs:songs,
             playlists:playlists

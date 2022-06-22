@@ -19,14 +19,12 @@ block content
                 div(class=" p-8 m-8 bg-white rounded-lg")
                     section.border-purple-200.rounded-lg.h-96.border-4.border-dashed(class=" p-8 bg-white")
                         //- Content-Type: x-www-form-urlencoded
-                        form(action="/playlists", method="post")
-                            input(type="text", name="name", value=playlist ? playlist.name : null)
-                            button Crear playlist
-
-            if error
-                p(class="bg-red-300 text-red-900 p-3 w-max") #{error}
-
-            each playlist in playlists 
-                p #{playlist.name}
+                        - var allPlaylists = playlists; 
+                        if allPlaylists
+                            each playlist in allPlaylists 
+                                p playlist name: #{playlist.name}
+    include ./components/footer.pug
     script
-        include ../static/js/playlist.js
+        include ../static/js/twelements.js
+    script
+        include ../static/js/sweetalert2.js
